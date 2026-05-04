@@ -73,7 +73,7 @@ app.use(helmet({
       fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
       scriptSrc: ["'self'", "'unsafe-inline'", 'https://translate.google.com', 'https://translate.googleapis.com'],
       connectSrc: ["'self'", 'https://translate.googleapis.com', 'https://translate.google.com', 'https://api.web3forms.com'],
-      frameSrc: ["'self'", 'https://translate.google.com', 'https://translate.googleapis.com'],
+      frameSrc: ["'self'", 'https://translate.google.com', 'https://translate.googleapis.com', 'https://www.google.com'],
       formAction: ["'self'", 'https://api.web3forms.com'],
       objectSrc: ["'none'"]
     }

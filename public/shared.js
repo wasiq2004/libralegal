@@ -55,6 +55,12 @@ const TRANSLATABLE_ATTRIBUTE_NAMES = ['placeholder', 'title', 'aria-label', 'alt
 const TRANSLATION_EXCLUDED_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAME']);
 const WHATSAPP_NUMBER = '971581216686';
 const WHATSAPP_MESSAGE = 'Hello, I would like to inquire about your legal services.';
+const SOCIAL_LINKS = [
+  { href: 'http://linkedin.com/company/libra-legal-consultancy', label: 'LinkedIn', short: 'in' },
+  { href: 'http://instagram.com/libralegalconsultancy', label: 'Instagram', short: 'IG' },
+  { href: 'https://www.facebook.com/libralegalconsultancy', label: 'Facebook', short: 'f' },
+  { href: 'http://tiktok.com/@libra.legal.consu', label: 'TikTok', short: 'TK' }
+];
 let currentTranslationToken = 0;
 
 function getSavedLanguage() {
@@ -135,14 +141,6 @@ function getNavHTML(activePage = 'home', transparent = false) {
     </nav>
     <div class="mobile-menu" id="mobileMenu">
       ${NAV_PAGES.map((page) => `<a href="${page.href}">${page.label}</a>`).join('')}
-      <div class="mobile-lang-list">
-        ${LANGUAGE_OPTIONS.map((option) => `
-          <button class="mobile-lang-option${option.code === getSavedLanguage() ? ' active' : ''}" type="button" data-language="${option.code}">
-            <span class="lang-flag">${getFlagEmoji(option.flag)}</span>
-            <span>${option.label}</span>
-          </button>
-        `).join('')}
-      </div>
       <a href="/contact" class="btn-consultation">FREE CONSULTATION</a>
     </div>
   `;
@@ -166,12 +164,9 @@ function getFooterHTML() {
                 <a href="#"><span class="icon">📍</span> Dubai, United Arab Emirates</a>
               </div>
               <div class="footer-social">
-                <a href="#" class="social-icon" title="LinkedIn">in</a>
-                <a href="#" class="social-icon" title="Facebook">f</a>
-                <a href="#" class="social-icon" title="Instagram">IG</a>
-                <a href="#" class="social-icon" title="X">X</a>
-                <a href="#" class="social-icon" title="YouTube">▶</a>
-                <a href="#" class="social-icon" title="TikTok">TK</a>
+                ${SOCIAL_LINKS.map((link) => `
+                  <a href="${link.href}" class="social-icon" title="${link.label}" aria-label="${link.label}" target="_blank" rel="noopener noreferrer">${link.short}</a>
+                `).join('')}
               </div>
             </div>
             <div class="footer-col">
@@ -251,9 +246,12 @@ function bindLayoutInteractions() {
   const toggle = document.getElementById('langToggle');
   const switcher = document.getElementById('langSwitcher');
   const menu = document.getElementById('langMenu');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
 
   if (toggle && switcher && menu) {
-    toggle.addEventListener('click', () => {
+    toggle.addEventListener('click', (event) => {
+      event.stopPropagation();
       const isOpen = switcher.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
@@ -266,6 +264,19 @@ function bindLayoutInteractions() {
     });
   }
 
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', (event) => {
+      event.preventDefault();
+      toggleMobileMenu();
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+  }
+
   document.querySelectorAll('[data-language]').forEach((button) => {
     button.addEventListener('click', async () => {
       const targetLanguage = button.dataset.language || 'en';
@@ -274,6 +285,10 @@ function bindLayoutInteractions() {
       if (switcher && toggle) {
         switcher.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      if (mobileMenu) {
+        mobileMenu.classList.remove('open');
       }
     });
   });
@@ -287,6 +302,12 @@ function toggleMobileMenu() {
     menu.classList.toggle('open');
   }
 }
+
+window.toggleMobileMenu = toggleMobileMenu;
+window.renderLayout = renderLayout;
+window.initNavbar = initNavbar;
+window.initFadeIn = initFadeIn;
+window.staggerChildren = staggerChildren;
 
 function initNavbar(isTransparent = false) {
   const navbar = document.getElementById('navbar');

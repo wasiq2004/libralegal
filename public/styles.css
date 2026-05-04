@@ -1262,6 +1262,124 @@ footer {
     max-width: 480px;
 }
 
+.contact-map-section {
+    background: linear-gradient(180deg, #f7f4ee 0%, #ffffff 100%);
+    padding: 28px 0 88px;
+}
+
+.contact-map-shell {
+    margin-top: 0;
+    background: #ffffff;
+    border: 1px solid rgba(14, 31, 58, 0.08);
+    box-shadow: 0 30px 80px rgba(10, 22, 40, 0.08);
+    padding: 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: 28px;
+    align-items: stretch;
+}
+
+.contact-map-copy {
+    padding: 24px 12px 24px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-map-copy .eyebrow {
+    margin-bottom: 18px;
+}
+
+.contact-map-copy h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 600;
+    line-height: 1.16;
+    color: var(--navy);
+    margin-bottom: 18px;
+}
+
+.contact-map-copy p {
+    font-size: 15px;
+    color: #60728b;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.contact-map-frame {
+    position: relative;
+    min-height: 460px;
+    overflow: hidden;
+}
+
+.contact-map-frame iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 460px;
+    display: block;
+    filter: grayscale(0.08) contrast(1.03) saturate(0.92);
+}
+
+.contact-map-card {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    z-index: 2;
+    max-width: 292px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(14, 31, 58, 0.1);
+    box-shadow: 0 18px 40px rgba(10, 22, 40, 0.12);
+    padding: 18px 18px 16px;
+    backdrop-filter: blur(10px);
+}
+
+.contact-map-card-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.contact-map-card strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--navy);
+    margin-bottom: 10px;
+}
+
+.contact-map-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #5f7086;
+    margin: 0 0 14px;
+}
+
+.contact-map-card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.contact-map-card a:hover {
+    background: var(--navy-light);
+    transform: translateY(-1px);
+}
+
 .cta-right blockquote {
     font-family: var(--font-cormorant);
     font-size: 18px;
@@ -1762,6 +1880,12 @@ footer {
     gap: 0;
 }
 
+.contact-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .contact-detail {
     display: flex;
     gap: 16px;
@@ -1812,12 +1936,33 @@ footer {
     padding-top: 12px;
 }
 
+.contact-subsections-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 280px));
+    gap: 44px;
+    align-items: start;
+    justify-content: center;
+    padding-top: 42px;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-subsections-row .contact-subsection {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .contact-subsection .eyebrow {
     margin-bottom: 14px;
 }
 
 .contact-subsection p {
     margin: 0;
+    font-size: 14px;
+    line-height: 1.85;
 }
 
 .contact-subsection p a {
@@ -1832,6 +1977,8 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    align-items: center;
+    justify-content: center;
 }
 
 .contact-social-icon {
@@ -2356,13 +2503,63 @@ footer {
 
 @media (max-width: 768px) {
 
-    .nav-links,
-    .nav-right {
+    .nav-links {
         display: none;
+    }
+
+    .nav-right {
+        display: flex;
+        gap: 12px;
+    }
+
+    .nav-right .btn-consultation {
+        display: none;
+    }
+
+    .navbar,
+    .navbar.light,
+    .navbar.transparent {
+        background: transparent;
+        box-shadow: none;
+        border-bottom: none;
+    }
+
+    .navbar.light .nav-logo-text,
+    .navbar.light .nav-logo-name,
+    .navbar.light .nav-links a,
+    .navbar.light .lang-toggle {
+        color: var(--white);
+    }
+
+    .navbar.light .lang-toggle {
+        border-color: rgba(255, 255, 255, 0.26);
+        background: rgba(10, 22, 40, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 7px 10px;
+        font-family: var(--font-sans);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .navbar.light .lang-toggle:hover {
+        color: var(--gold);
+        border-color: rgba(201, 168, 76, 0.8);
+        background: rgba(10, 22, 40, 0.24);
     }
 
     .hamburger {
         display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: rgba(10, 22, 40, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     .hero-h1 {
@@ -2419,8 +2616,13 @@ footer {
         padding: 28px;
     }
 
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
     .service-item {
-        grid-template-columns: 60px 1fr;
+        padding: 30px 24px;
     }
 
     .service-arrow {
@@ -2983,6 +3185,15 @@ footer {
         gap: 28px;
     }
 
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .service-item {
+        padding: 36px 30px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr 1fr;
     }
@@ -3079,14 +3290,18 @@ footer {
         text-align: center;
     }
 
-    .service-item {
+    .services-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 20px;
+    }
+
+    .service-item {
         padding: 28px 22px;
     }
 
     .service-number {
         font-size: 28px;
+        margin-bottom: 18px;
     }
 
     .next-service-bar {
@@ -3168,6 +3383,32 @@ footer {
     .cta-grid {
         grid-template-columns: minmax(0, 1fr);
         gap: 22px;
+    }
+
+    .contact-map-shell {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 22px;
+    }
+
+    .contact-map-copy {
+        padding: 8px 4px 0;
+    }
+
+    .contact-map-frame,
+    .contact-map-frame iframe {
+        min-height: 360px;
+    }
+
+    .contact-subsections-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .contact-map-card {
+        position: static;
+        max-width: none;
+        margin-bottom: 16px;
     }
 
     .cta-left h2 {
