@@ -1734,6 +1734,11 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 80px;
+    align-items: start;
+}
+
+.contact-info {
+    padding-top: 8px;
 }
 
 .contact-info h2 {
@@ -1749,6 +1754,12 @@ footer {
     color: var(--gray-dark);
     line-height: 1.8;
     margin-bottom: 40px;
+}
+
+.contact-info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 .contact-detail {
@@ -1795,6 +1806,46 @@ footer {
 
 .contact-detail-info a:hover {
     color: var(--gold-dark);
+}
+
+.contact-subsection {
+    padding-top: 12px;
+}
+
+.contact-subsection .eyebrow {
+    margin-bottom: 14px;
+}
+
+.contact-subsection p {
+    margin: 0;
+}
+
+.contact-subsection p a {
+    color: var(--gold);
+}
+
+.contact-subsection p a:hover {
+    color: var(--gold-dark);
+}
+
+.contact-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.contact-social-icon {
+    width: 42px;
+    height: 42px;
+    border-color: rgba(10, 22, 40, 0.14);
+    color: var(--navy);
+    background: var(--white);
+}
+
+.contact-social-icon:hover {
+    border-color: var(--gold);
+    background: rgba(201, 168, 76, 0.08);
+    color: var(--gold);
 }
 
 /* Contact Form */
