@@ -53,6 +53,8 @@ const LANGUAGE_OPTIONS = [
 const LANGUAGE_STORAGE_KEY = 'libra-language';
 const TRANSLATABLE_ATTRIBUTE_NAMES = ['placeholder', 'title', 'aria-label', 'alt'];
 const TRANSLATION_EXCLUDED_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAME']);
+const WHATSAPP_NUMBER = '971581216686';
+const WHATSAPP_MESSAGE = 'Hello, I would like to inquire about your legal services.';
 let currentTranslationToken = 0;
 
 function getSavedLanguage() {
@@ -203,6 +205,27 @@ function getFooterHTML() {
   `;
 }
 
+function getWhatsAppButtonHTML() {
+  const encodedMessage = encodeURIComponent(WHATSAPP_MESSAGE);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+  return `
+    <a
+      href="${whatsappUrl}"
+      class="whatsapp-float"
+      aria-label="Chat on WhatsApp"
+      title="Chat on WhatsApp"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M19.11 17.46c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.34-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.63 1.11 2.82c.14.18 1.92 2.93 4.66 4.11.65.28 1.16.45 1.56.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.27.23-.61.23-1.14.16-1.25-.07-.11-.25-.18-.52-.32Z"/>
+        <path fill="currentColor" d="M16.03 3.2c-7.06 0-12.8 5.71-12.8 12.73 0 2.24.59 4.43 1.71 6.36L3.12 28.8l6.7-1.76a12.86 12.86 0 0 0 6.2 1.58h.01c7.05 0 12.78-5.71 12.78-12.74 0-3.4-1.33-6.59-3.76-9-2.42-2.41-5.64-3.74-9.02-3.74Zm0 23.26h-.01a10.7 10.7 0 0 1-5.46-1.5l-.39-.23-3.97 1.04 1.06-3.87-.26-.4a10.52 10.52 0 0 1-1.65-5.63c0-5.83 4.78-10.58 10.68-10.58 2.84 0 5.5 1.1 7.5 3.1a10.46 10.46 0 0 1 3.13 7.48c0 5.83-4.79 10.59-10.63 10.59Z"/>
+      </svg>
+    </a>
+  `;
+}
+
 function renderLayout(activePage, transparentNav = false) {
   const navContainer = document.getElementById('nav-placeholder');
   const footerContainer = document.getElementById('footer-placeholder');
@@ -213,6 +236,10 @@ function renderLayout(activePage, transparentNav = false) {
 
   if (footerContainer) {
     footerContainer.innerHTML = getFooterHTML();
+  }
+
+  if (!document.querySelector('.whatsapp-float')) {
+    document.body.insertAdjacentHTML('beforeend', getWhatsAppButtonHTML());
   }
 
   bindLayoutInteractions();

@@ -784,6 +784,35 @@ footer {
     color: var(--gold);
 }
 
+.whatsapp-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1200;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25d366;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 16px 34px rgba(20, 86, 51, 0.28);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(20, 86, 51, 0.34);
+    filter: brightness(1.03);
+}
+
+.whatsapp-float svg {
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
 .footer-col h4 {
     font-family: var(--font-sans);
     font-size: 10px;
@@ -3160,5 +3189,17 @@ footer {
 
     .hero-actions {
         gap: 12px;
+    }
+
+    .whatsapp-float {
+        right: 16px;
+        bottom: 16px;
+        width: 54px;
+        height: 54px;
+    }
+
+    .whatsapp-float svg {
+        width: 27px;
+        height: 27px;
     }
 }
