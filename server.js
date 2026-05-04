@@ -306,6 +306,10 @@ app.get('/services/:slug.html', async (req, res, next) => {
   }
 });
 
+app.use(express.static(path.join(ROOT, 'public'), {
+  index: false
+}));
+
 app.use(express.static(ROOT, {
   index: false,
   extensions: ['html']
