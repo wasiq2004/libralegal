@@ -2382,7 +2382,7 @@ footer {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('public/assets/image3.jpeg') center/cover no-repeat;
+    background: url('/assets/image3.jpeg') center/cover no-repeat;
     z-index: 0;
 }
 
@@ -2543,7 +2543,7 @@ footer {
 .about-image {
     width: 100%;
     height: 480px;
-    background: url('public/assets/image1.jpg') center/cover no-repeat;
+    background: url('/assets/image1.jpg') center/cover no-repeat;
     margin-bottom: 50px;
 }
 
@@ -2710,7 +2710,7 @@ footer {
 }
 
 .practice-image {
-    background: url('public/assets/image2.jpg') center/cover no-repeat;
+    background: url('/assets/image2.jpg') center/cover no-repeat;
     filter: grayscale(100%);
     margin-left: 64px;
     margin-bottom: 34px;

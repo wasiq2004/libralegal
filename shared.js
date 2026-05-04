@@ -2,7 +2,7 @@
    LIBRA LEGAL CONSULTANCY - SHARED JS
    ============================================ */
 
-const logoImage = '<img src="/public/assets/libralegalLOGO.png" alt="Libra Legal Consultancy logo" class="brand-logo-image" />';
+const logoImage = '<img src="/assets/libralegalLOGO.png" alt="Libra Legal Consultancy logo" class="brand-logo-image" />';
 
 const NAV_PAGES = [
   { id: 'home', label: 'Home', href: '/' },
