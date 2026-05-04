@@ -1727,40 +1727,48 @@ footer {
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    background: #fbfaf7;
-    border: 1px solid #d9dde2;
+    background: #fdfcf9;
+    border: 1px solid rgba(115, 129, 151, 0.22);
 }
 
 .stat-box {
-    min-height: 155px;
-    background: #fbfaf7;
-    padding: 34px 28px;
-    border-right: 1px solid #d9dde2;
-    border-bottom: 1px solid #d9dde2;
+    min-height: 190px;
+    background: #fdfcf9;
+    padding: 40px 28px 36px;
+    border-right: 1px solid rgba(115, 129, 151, 0.22);
+    border-bottom: 1px solid rgba(115, 129, 151, 0.22);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 14px;
 }
 
 .stat-value {
     font-family: var(--font-serif);
-    font-size: clamp(42px, 4vw, 58px);
+    font-size: clamp(38px, 4vw, 56px);
     font-weight: 600;
     color: var(--gold);
-    line-height: 1;
+    line-height: 1.05;
     margin: 0;
 }
 
 .stat-label {
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-weight: 500;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: #738197;
     line-height: 1.5;
+}
+
+.stat-box:nth-child(2n) {
+    border-right: none;
+}
+
+.stat-box:nth-last-child(-n + 2) {
+    border-bottom: none;
 }
 
 .approach-section {
@@ -2863,9 +2871,9 @@ footer {
 }
 
 .stat-box {
-    min-height: 188px;
+    min-height: 148px;
     background: #fbfaf7;
-    padding: 44px 28px;
+    padding: 28px 24px;
     border-right: 1px solid #d9dde2;
     border-bottom: 1px solid #d9dde2;
     text-align: center;
@@ -2873,7 +2881,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .stat-box:nth-child(2n) {
