@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | Libra Legal Hub</title>
+  <meta name="description" content="Contact Libra Legal Consultancy — Dubai, UAE. Free initial consultation available."/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="container page-hero-content">
+    <span class="eyebrow fade-in">Get In Touch</span>
+    <h1 class="fade-in" data-delay="100">Contact Us</h1>
+    <div class="fade-in" data-delay="200" style="width:60px;height:2px;background:var(--gold);margin:20px 0 24px;"></div>
+    <p class="fade-in" data-delay="300">Our legal team is available to assist with advisory, regulatory, and dispute-related matters across the UAE. Contact us to arrange a confidential initial consultation.</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section section-pad">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: Info -->
+      <div class="contact-info fade-in-left">
+        <span class="eyebrow">Reach Our Team</span>
+        <h2>Speak with a Legal Practitioner</h2>
+        <p>For legal advisory, regulatory guidance, or dispute-related matters, our team is available to assist. We offer a free initial consultation for all new enquiries.</p>
+
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail-info">
+            <label>Address</label>
+            <strong>Libra Legal Consultancy</strong>
+            <a href="#">Dubai, United Arab Emirates</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">✉</div>
+          <div class="contact-detail-info">
+            <label>Email</label>
+            <strong>General Enquiries</strong>
+            <a href="mailto:info@libralegalconsultancy.com">info@libralegalconsultancy.com</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">📞</div>
+          <div class="contact-detail-info">
+            <label>Phone</label>
+            <strong>Direct Line</strong>
+            <a href="tel:+971581216686">+971 58 121 6686</a>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;">
+          <span class="eyebrow">Office Hours</span>
+          <p style="font-size:14px;color:var(--gray-dark);line-height:1.8;">Sunday – Thursday: 9:00 AM – 6:00 PM GST<br>Friday – Saturday: By appointment only</p>
+        </div>
+
+        <div style="margin-top:40px;">
+          <span class="eyebrow">Practice Areas</span>
+          <p style="font-size:14px;color:var(--gray-dark);line-height:1.8;margin-bottom:16px;">We advise across 26 specialist practice areas. <a href="services.html" style="color:var(--gold);">View all practice areas →</a></p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="fade-in-right" data-delay="150">
+        <div class="contact-form">
+          <h3>Send a Message</h3>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" aria-label="Full Name" placeholder="Your full name" required/>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" aria-label="Email Address" placeholder="your@email.com" required/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone (optional)</label>
+                <input type="tel" id="phone" name="phone" aria-label="Phone Number" placeholder="+971 xx xxx xxxx"/>
+              </div>
+              <div class="form-group">
+                <label for="sector">Select Sector (optional)</label>
+                <select id="sector" name="sector" aria-label="Select Sector">
+                  <option value="">— Select a sector —</option>
+                  <option>Healthcare &amp; Medical</option>
+                  <option>Banking &amp; Finance</option>
+                  <option>Insurance</option>
+                  <option>Real Estate &amp; Property</option>
+                  <option>Construction &amp; Infrastructure</option>
+                  <option>Technology &amp; Startups</option>
+                  <option>Shipping &amp; Maritime</option>
+                  <option>Corporate &amp; Commercial</option>
+                  <option>Family &amp; Private Client</option>
+                  <option>Government &amp; Regulatory</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message *</label>
+              <textarea id="message" name="message" aria-label="Your message" placeholder="Briefly describe your legal matter..." required></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">Send Message</button>
+              <span class="form-note">We respond within 1 business day.</span>
+            </div>
+            <div class="form-success" id="formSuccess">
+              ✓ Thank you. Your message has been received. A member of our team will be in touch shortly.
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP PLACEHOLDER -->
+<section style="background:var(--navy);padding:80px 0;">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow" style="color:var(--gold);display:block;margin-bottom:16px;">Location</span>
+    <h2 style="font-family:var(--font-serif);font-size:32px;color:var(--white);margin-bottom:24px;">Dubai, United Arab Emirates</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto;">Libra Legal Consultancy operates from Dubai — serving clients across the UAE, GCC, and internationally.</p>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="shared.js"></script>
+<script>
+  renderLayout('contact');
+  initFadeIn();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    // Simulate submission
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      success.style.display = 'block';
+      btn.textContent = 'Sent ✓';
+      form.reset();
+    }, 1200);
+  }
+</script>
+</body>
+</html>

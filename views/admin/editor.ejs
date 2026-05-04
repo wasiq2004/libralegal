@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= mode === 'edit' ? 'Edit Blog Post' : 'Add Blog Post' %> | Libra Legal Consultancy</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <div class="admin-app admin-wrap">
+      <%- include('partials/sidebar', { adminUser, csrfToken, currentSection }) %>
+
+      <section class="admin-main">
+        <div class="admin-head admin-head-main">
+          <div>
+            <span class="admin-kicker">Blog CMS</span>
+            <h1><%= mode === 'edit' ? 'Edit Blog Post' : 'Create Blog Post' %></h1>
+            <p class="admin-muted">Use clean text for metadata and permitted HTML tags in the article body: <code>p</code>, <code>h2</code>, <code>h3</code>, <code>ul</code>, <code>ol</code>, <code>li</code>, <code>strong</code>, <code>em</code>, and links.</p>
+          </div>
+          <div class="admin-btn-row">
+            <a href="/admin/dashboard?section=blogs" class="admin-btn-secondary">Back to Dashboard</a>
+          </div>
+        </div>
+
+        <% if (errors && errors.length) { %>
+          <div class="admin-alert error">
+            <ul>
+              <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <section class="admin-form-card">
+          <h2><%= mode === 'edit' ? 'Update Article' : 'New Article' %></h2>
+          <p>Published posts appear on the public <code>/blogs</code> page automatically.</p>
+
+          <form method="post" action="<%= mode === 'edit' ? `/admin/blogs/${post.id}` : '/admin/blogs' %>" class="admin-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+            <div class="admin-grid">
+              <div>
+                <div class="admin-field">
+                  <label for="title">Title</label>
+                  <input id="title" name="title" type="text" maxlength="180" value="<%= post.title || '' %>" required />
+                </div>
+
+                <div class="admin-field">
+                  <label for="excerpt">Excerpt</label>
+                  <textarea id="excerpt" name="excerpt" rows="4" style="min-height:120px;" required><%= post.excerpt || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="content_html">Article Content (HTML)</label>
+                  <textarea id="content_html" name="content_html" required><%= post.content_html || '' %></textarea>
+                </div>
+              </div>
+
+              <div>
+                <div class="admin-field">
+                  <label for="category">Category</label>
+                  <input id="category" name="category" type="text" maxlength="80" value="<%= post.category || '' %>" required />
+                </div>
+
+                <div class="admin-field">
+                  <label for="slug">Slug</label>
+                  <input id="slug" name="slug" type="text" maxlength="190" value="<%= post.slug || '' %>" placeholder="leave blank to auto-generate" />
+                </div>
+
+                <div class="admin-field">
+                  <label for="hero_image_url">Hero Image URL</label>
+                  <input id="hero_image_url" name="hero_image_url" type="url" maxlength="2048" value="<%= post.hero_image_url || '' %>" required />
+                </div>
+
+                <div class="admin-field">
+                  <label for="meta_description">Meta Description</label>
+                  <textarea id="meta_description" name="meta_description" rows="3" style="min-height:110px;"><%= post.meta_description || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="published_at">Published At</label>
+                  <input id="published_at" name="published_at" type="datetime-local" value="<%= post.published_at_local || '' %>" required />
+                </div>
+
+                <div class="admin-field">
+                  <label for="status">Status</label>
+                  <select id="status" name="status">
+                    <option value="published" <%= post.status === 'published' ? 'selected' : '' %>>Published</option>
+                    <option value="draft" <%= post.status === 'draft' ? 'selected' : '' %>>Draft</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-btn-row">
+              <button type="submit" class="admin-btn"><%= mode === 'edit' ? 'Save Changes' : 'Create Blog Post' %></button>
+              <a href="/admin/dashboard?section=blogs" class="admin-btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </section>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

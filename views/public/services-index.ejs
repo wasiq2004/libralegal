@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Libra Legal Hub</title>
+  <meta name="description" content="Full spectrum legal advisory across 26 practice areas - regulatory, commercial, and dispute-related matters in the UAE." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-content">
+      <span class="eyebrow fade-in">Practice Areas</span>
+      <h1 class="fade-in" data-delay="100">Full Spectrum<br />Legal Advisory</h1>
+      <div class="fade-in" data-delay="200" style="width:60px;height:2px;background:var(--gold);margin:20px 0 24px;"></div>
+      <p class="fade-in" data-delay="300">Comprehensive legal counsel across <%= services.length %> practice areas - regulatory, commercial, and dispute-related matters in the UAE.</p>
+    </div>
+  </section>
+
+  <section class="section-pad" style="background:var(--white);">
+    <div class="container">
+      <div class="services-grid">
+        <% services.forEach((service) => { %>
+          <a href="<%= service.href %>" class="service-item fade-in-up">
+            <span class="service-number"><%= service.numberLabel %></span>
+            <div class="service-info">
+              <h3><%= service.title %></h3>
+              <p><%= service.excerpt %></p>
+            </div>
+            <span class="learn-more">LEARN MORE <span class="arrow">→</span></span>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section-pad-sm">
+    <div class="cta-bg"></div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-left">
+          <span class="eyebrow">Get Started</span>
+          <h2>Speak with Our Legal Team</h2>
+          <p>For legal advisory, regulatory guidance, or dispute-related matters, our experienced practitioners are available to assist.</p>
+        </div>
+        <div class="cta-right">
+          <a href="/contact" class="btn-primary">Request a Free Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/shared.js"></script>
+  <script>
+    renderLayout('services');
+    staggerChildren('.service-item', 0, 24);
+    initFadeIn();
+  </script>
+</body>
+</html>

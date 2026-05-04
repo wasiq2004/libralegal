@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogs | Libra Legal Hub</title>
+  <meta name="description" content="Legal insights, updates, and analysis from Libra Legal Consultancy on UAE law and regulation." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="blog-list-hero">
+    <div class="container blog-list-hero-inner">
+      <span class="eyebrow fade-in">Legal Insights</span>
+      <h1 class="fade-in" data-delay="100">Blogs &amp; Legal Updates</h1>
+      <p class="fade-in" data-delay="200">Regulatory updates, legal analysis, and sector insights from the Libra Legal team.</p>
+    </div>
+  </section>
+
+  <section class="blog-list-section">
+    <div class="container blog-list-container">
+      <div class="blogs-grid">
+        <% posts.forEach((post, index) => { %>
+          <article class="blog-card fade-in-up" data-delay="<%= index * 80 %>">
+            <a href="/blogs/<%= post.slug %>" class="blog-card-link" aria-label="Read <%= post.title %>">
+              <img class="blog-card-image" src="<%= post.hero_image_url %>" alt="<%= post.title %>" loading="lazy" />
+              <div class="blog-card-body">
+                <div class="blog-card-meta">
+                  <span class="blog-category"><%= post.category %></span>
+                  <span class="blog-meta-divider">|</span>
+                  <span class="blog-date"><%= post.monthLabel %></span>
+                </div>
+                <h3><%= post.title %></h3>
+                <p><%= post.excerpt %></p>
+                <span class="blog-read-more">Read More <span class="arrow">&rarr;</span></span>
+              </div>
+            </a>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/shared.js"></script>
+  <script>
+    renderLayout('blogs');
+    staggerChildren('.blog-card', 0, 80);
+    initFadeIn();
+  </script>
+</body>
+</html>

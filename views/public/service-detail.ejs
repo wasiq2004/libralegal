@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= service.title %> | Libra Legal Hub</title>
+  <meta name="description" content="<%= service.meta_description %>" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-content">
+      <a href="/services" class="back-link"><span class="arrow-left">&larr;</span> All Practice Areas</a>
+      <span class="eyebrow">Practice Area</span>
+      <h1><%= service.title %></h1>
+      <div style="width:60px;height:2px;background:var(--gold);margin:20px 0 24px;"></div>
+      <p><%= service.hero_summary %></p>
+    </div>
+  </section>
+
+  <section class="service-content-section">
+    <div class="container">
+      <div class="service-content-grid">
+        <div class="service-main fade-in">
+          <h2>Overview</h2>
+          <%- service.overview_html %>
+
+          <h2>Strategic Approach</h2>
+          <%- service.approach_html %>
+
+          <h2>Key Practice Areas</h2>
+          <ul>
+            <% service.key_points.forEach((item) => { %>
+              <li><%= item %></li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <div class="service-sidebar">
+          <div class="sidebar-cta-box">
+            <h3><%= service.sidebar_cta_title %></h3>
+            <p><%= service.sidebar_cta_text %></p>
+            <a href="/contact" class="btn-primary">Get Started</a>
+          </div>
+          <% if (relatedServices.length) { %>
+            <div class="related-box">
+              <h4>Related Practice Areas</h4>
+              <ul>
+                <% relatedServices.forEach((item) => { %>
+                  <li><a href="<%= item.href %>"><%= item.title %></a></li>
+                <% }) %>
+              </ul>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="statutes-section">
+    <div class="container">
+      <h2>Relevant UAE Statutes</h2>
+      <ul>
+        <% service.statutes.forEach((item) => { %>
+          <li><%= item %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </section>
+
+  <% if (nextService) { %>
+    <div class="next-service-bar">
+      <div class="container">
+        <div class="next-service-inner">
+          <div>
+            <span class="label">Next Practice Area</span>
+            <h3><%= nextService.title %></h3>
+          </div>
+          <a href="<%= nextService.href %>">View Practice Area →</a>
+        </div>
+      </div>
+    </div>
+  <% } %>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/shared.js"></script>
+  <script>
+    renderLayout('services');
+    initFadeIn();
+  </script>
+</body>
+</html>

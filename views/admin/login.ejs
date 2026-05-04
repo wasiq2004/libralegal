@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | Libra Legal Consultancy</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <div class="admin-wrap">
+      <section class="admin-auth-card">
+        <span class="admin-kicker">Admin CMS</span>
+        <h1>Secure Sign In</h1>
+        <p>Access the blog content management area to create, publish, update, or remove articles from the site.</p>
+
+        <% if (flashError) { %>
+          <div class="admin-alert error"><%= flashError %></div>
+        <% } %>
+
+        <form method="post" action="/admin/login" class="admin-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+          <div class="admin-field">
+            <label for="email">Email Address</label>
+            <input id="email" type="email" name="email" value="<%= email || '' %>" required autocomplete="email" />
+          </div>
+
+          <div class="admin-field">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required autocomplete="current-password" />
+          </div>
+
+          <div class="admin-btn-row">
+            <button type="submit" class="admin-btn">Sign In</button>
+            <a href="/" class="admin-btn-secondary">Back to Site</a>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

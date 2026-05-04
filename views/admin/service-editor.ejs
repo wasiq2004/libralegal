@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= mode === 'edit' ? 'Edit Service Page' : 'Add Service Page' %> | Libra Legal Consultancy</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <div class="admin-app admin-wrap">
+      <%- include('partials/sidebar', { adminUser, csrfToken, currentSection }) %>
+
+      <section class="admin-main">
+        <div class="admin-head admin-head-main">
+          <div>
+            <span class="admin-kicker">Services CMS</span>
+            <h1><%= mode === 'edit' ? 'Edit Service Page' : 'Create Service Page' %></h1>
+            <p class="admin-muted">These entries drive both the public <code>/services</code> listing and each service detail page. HTML fields support the same safe tags as the blog editor.</p>
+          </div>
+          <div class="admin-btn-row">
+            <a href="/admin/dashboard?section=services" class="admin-btn-secondary">Back to Dashboard</a>
+          </div>
+        </div>
+
+        <% if (errors && errors.length) { %>
+          <div class="admin-alert error">
+            <ul>
+              <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <section class="admin-form-card">
+          <h2><%= mode === 'edit' ? 'Update Service' : 'New Service' %></h2>
+          <p>Keep related service slugs one per line. Order controls the listing sequence and the "next practice area" navigation.</p>
+
+          <form method="post" action="<%= mode === 'edit' ? `/admin/services/${service.id}` : '/admin/services' %>" class="admin-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+            <div class="admin-grid admin-grid-wide">
+              <div>
+                <div class="admin-field">
+                  <label for="title">Title</label>
+                  <input id="title" name="title" type="text" maxlength="180" value="<%= service.title || '' %>" required />
+                </div>
+
+                <div class="admin-field">
+                  <label for="excerpt">Listing Excerpt</label>
+                  <textarea id="excerpt" name="excerpt" rows="4" style="min-height:120px;" required><%= service.excerpt || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="hero_summary">Hero Summary</label>
+                  <textarea id="hero_summary" name="hero_summary" rows="4" style="min-height:120px;" required><%= service.hero_summary || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="overview_html">Overview (HTML)</label>
+                  <textarea id="overview_html" name="overview_html" required><%= service.overview_html || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="approach_html">Strategic Approach (HTML)</label>
+                  <textarea id="approach_html" name="approach_html" required><%= service.approach_html || '' %></textarea>
+                </div>
+              </div>
+
+              <div>
+                <div class="admin-field">
+                  <label for="order_index">Display Order</label>
+                  <input id="order_index" name="order_index" type="number" min="1" value="<%= service.order_index || 1 %>" required />
+                </div>
+
+                <div class="admin-field">
+                  <label for="slug">Slug</label>
+                  <input id="slug" name="slug" type="text" maxlength="190" value="<%= service.slug || '' %>" placeholder="leave blank to auto-generate" />
+                </div>
+
+                <div class="admin-field">
+                  <label for="meta_description">Meta Description</label>
+                  <textarea id="meta_description" name="meta_description" rows="3" style="min-height:110px;"><%= service.meta_description || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="consultation_title">Consultation Heading</label>
+                  <input id="consultation_title" name="consultation_title" type="text" maxlength="160" value="<%= service.consultation_title || '' %>" />
+                </div>
+
+                <div class="admin-field">
+                  <label for="consultation_text">Consultation Copy</label>
+                  <textarea id="consultation_text" name="consultation_text" rows="4" style="min-height:120px;"><%= service.consultation_text || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="sidebar_cta_title">Sidebar CTA Heading</label>
+                  <input id="sidebar_cta_title" name="sidebar_cta_title" type="text" maxlength="160" value="<%= service.sidebar_cta_title || '' %>" />
+                </div>
+
+                <div class="admin-field">
+                  <label for="sidebar_cta_text">Sidebar CTA Copy</label>
+                  <textarea id="sidebar_cta_text" name="sidebar_cta_text" rows="4" style="min-height:120px;"><%= service.sidebar_cta_text || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="key_points_text">Key Practice Areas</label>
+                  <textarea id="key_points_text" name="key_points_text" rows="8" style="min-height:200px;" required><%= service.key_points_text || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="statutes_text">Relevant Statutes</label>
+                  <textarea id="statutes_text" name="statutes_text" rows="8" style="min-height:200px;" required><%= service.statutes_text || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="related_service_slugs_text">Related Service Slugs</label>
+                  <textarea id="related_service_slugs_text" name="related_service_slugs_text" rows="6" style="min-height:160px;"><%= service.related_service_slugs_text || '' %></textarea>
+                </div>
+
+                <div class="admin-field">
+                  <label for="status">Status</label>
+                  <select id="status" name="status">
+                    <option value="published" <%= service.status === 'published' ? 'selected' : '' %>>Published</option>
+                    <option value="draft" <%= service.status === 'draft' ? 'selected' : '' %>>Draft</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-btn-row">
+              <button type="submit" class="admin-btn"><%= mode === 'edit' ? 'Save Changes' : 'Create Service Page' %></button>
+              <a href="/admin/dashboard?section=services" class="admin-btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </section>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

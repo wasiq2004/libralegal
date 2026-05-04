@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= post.title %> | Libra Legal Hub</title>
+  <meta name="description" content="<%= post.meta_description %>" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="blog-post-hero">
+    <div class="blog-post-hero-bg" style="background-image:url('<%= post.hero_image_url %>');"></div>
+    <div class="blog-post-hero-overlay"></div>
+    <div class="container blog-post-hero-content">
+      <div class="blog-post-meta">
+        <span class="blog-category"><%= post.category %></span>
+        <span class="blog-date"><%= post.monthLabel %></span>
+      </div>
+      <h1 class="blog-post-title"><%= post.title %></h1>
+    </div>
+  </section>
+
+  <section class="blog-post-content">
+    <div class="container">
+      <div class="blog-post-grid">
+        <article class="blog-post-body fade-in">
+          <span class="divider-line"></span>
+          <%- post.content_html %>
+        </article>
+
+        <aside class="blog-post-sidebar fade-in" data-delay="100">
+          <div class="blog-sidebar-box">
+            <span class="eyebrow">Free Initial Consultation</span>
+            <h3>Need advice on a similar matter?</h3>
+            <p>Speak with our team about the legal and regulatory issues raised in this article and the practical steps available in your situation.</p>
+            <a href="/contact.html" class="btn-primary">Get Free Consultation</a>
+          </div>
+
+          <div class="more-articles">
+            <h4>More Articles</h4>
+            <% relatedPosts.forEach((related) => { %>
+              <div class="more-article-item">
+                <span class="more-article-category"><%= related.category %></span>
+                <a href="/blogs/<%= related.slug %>"><%= related.title %></a>
+              </div>
+            <% }) %>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/shared.js"></script>
+  <script>
+    renderLayout('blogs');
+    initFadeIn();
+  </script>
+</body>
+</html>
