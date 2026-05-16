@@ -45,10 +45,55 @@
               <p><%= publishedServicesCount %> published service pages are currently live.</p>
             </article>
             <article class="admin-metric-card">
+              <span class="admin-kicker">Homepage</span>
+              <strong>Live</strong>
+              <p>The public home page now reads from a single CMS-managed content record.</p>
+            </article>
+            <article class="admin-metric-card">
               <span class="admin-kicker">Workflow</span>
               <strong>Focused</strong>
               <p>Use the sidebar to jump between blog management and service management without leaving the dashboard shell.</p>
             </article>
+          </section>
+        <% } %>
+
+        <% if (currentSection === 'homepage') { %>
+          <section class="admin-panel">
+            <div class="admin-panel-head">
+              <div>
+                <h2>Homepage Content</h2>
+                <p>Hero, practice copy, expertise cards, Why Libra, testimonials, and the CTA are all synced from one editor.</p>
+              </div>
+              <a href="/admin/homepage/edit" class="admin-btn">Edit Homepage</a>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Area</th>
+                    <th>Status</th>
+                    <th>Updated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Homepage</strong>
+                      <span>All public homepage sections are managed from a single CMS record.</span>
+                    </td>
+                    <td><span class="admin-badge published">live</span></td>
+                    <td><%= homepage && homepage.updated_at ? new Date(homepage.updated_at).toLocaleString() : 'Using current live defaults' %></td>
+                    <td>
+                      <div class="admin-table-actions">
+                        <a href="/" class="admin-btn-secondary">View</a>
+                        <a href="/admin/homepage/edit" class="admin-btn-secondary">Edit</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </section>
         <% } %>
 
@@ -113,7 +158,7 @@
             <div class="admin-panel-head">
               <div>
                 <h2>Service Pages</h2>
-                <p>The services listing and each service detail page stay synced from these records.</p>
+                <p>All imported service pages are now managed from these CMS records and power the public services experience.</p>
               </div>
               <a href="/admin/services/new" class="admin-btn">Add Service Page</a>
             </div>
@@ -141,7 +186,7 @@
                       <td>
                         <strong><%= service.title %></strong>
                         <% if (service.isReadOnly) { %>
-                          <span>Static source only. Connect MySQL to edit or delete.</span>
+                          <span>Database unavailable. This fallback entry cannot be edited until MySQL is connected.</span>
                         <% } %>
                       </td>
                       <td>

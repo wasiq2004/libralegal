@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Libra Legal Consultancy FZE</title>
+  <meta name="description" content="<%= homepage.meta_description %>" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="hero">
+    <div class="hero-bg" style="background-image:url('<%= homepage.hero.background_image_url %>');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow fade-in"><%= homepage.hero.eyebrow %></span>
+      <h1 class="hero-h1 fade-in" data-delay="100"><%= homepage.hero.title %></h1>
+      <div class="hero-intro fade-in" data-delay="200">
+        <p><%= homepage.hero.intro %></p>
+      </div>
+      <div class="hero-actions fade-in" data-delay="300">
+        <a href="<%= homepage.hero.primary_href %>" class="btn-primary"><%= homepage.hero.primary_label %></a>
+        <a href="<%= homepage.hero.secondary_href %>" class="btn-outline"><%= homepage.hero.secondary_label %></a>
+      </div>
+      <div class="scroll-btn fade-in" data-delay="400">SCROLL</div>
+    </div>
+  </section>
+
+  <section class="practice-intro">
+    <div class="practice-grid">
+      <div class="practice-image" style="background-image:url('<%= homepage.practice.image_url %>');"></div>
+      <div class="practice-content">
+        <span class="section-label"><%= homepage.practice.label %></span>
+        <h2><%= homepage.practice.title %></h2>
+        <p><%= homepage.practice.paragraph_1 %></p>
+        <p><%= homepage.practice.paragraph_2 %></p>
+        <div style="margin-top:32px;">
+          <a href="<%= homepage.practice.cta_href %>" class="learn-more practice-cta"><%= homepage.practice.cta_label %> <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="expertise-section section-pad" style="background:var(--off-white);">
+    <div class="container">
+      <div class="expertise-header">
+        <div>
+          <span class="eyebrow"><%= homepage.expertise.label %></span>
+          <h2><%= homepage.expertise.title %></h2>
+        </div>
+        <a href="<%= homepage.expertise.cta_href %>" class="btn-outline-dark" style="white-space:nowrap;"><%= homepage.expertise.cta_label %></a>
+      </div>
+      <div class="expertise-grid">
+        <% homepage.expertise.items.forEach((item, index) => { %>
+          <div class="expertise-card <%= homepage.expertise.active_index === index + 1 ? 'active ' : '' %>fade-in-up" <%= index > 0 ? `data-delay="${(index % 3) * 100}"` : '' %>>
+            <img class="card-image" src="<%= item.image_url %>" alt="<%= item.image_alt %>" loading="lazy" />
+            <div class="card-body">
+              <span class="card-number"><%= item.number %></span>
+              <h3 class="card-title"><%= item.title %></h3>
+              <a href="<%= item.href %>" class="learn-more">LEARN MORE <span class="arrow">→</span></a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section section-pad">
+    <div class="container">
+      <div class="why-header">
+        <span class="section-label"><%= homepage.why.label %></span>
+        <h2><%= homepage.why.title %></h2>
+      </div>
+      <div class="why-grid">
+        <% homepage.why.items.forEach((item, index) => { %>
+          <div class="why-card scale-up" <%= index > 0 ? `data-delay="${index * 100}"` : '' %>>
+            <div class="why-card-number"><%= item.number %></div>
+            <h3><%= item.title %></h3>
+            <p><%= item.text %></p>
+          </div>
+        <% }) %>
+      </div>
+      <div class="quote-block fade-in" style="margin-top:60px;">
+        <blockquote>"<%= homepage.why.quote %>"</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section section-pad">
+    <div class="container">
+      <div class="testimonials-header fade-in">
+        <span class="section-label"><%= homepage.testimonials.label %></span>
+        <h2><%= homepage.testimonials.title %></h2>
+        <p><%= homepage.testimonials.intro %></p>
+      </div>
+      <div class="testimonials-grid">
+        <% homepage.testimonials.items.forEach((item, index) => { %>
+          <article class="testimonial-card fade-in-up" <%= index > 0 ? `data-delay="${(index % 3) * 100}"` : '' %>>
+            <p class="testimonial-text"><%= item.text %></p>
+            <div class="testimonial-client">
+              <img src="<%= item.photo_url %>" alt="<%= item.photo_alt %>" class="testimonial-avatar" loading="lazy" />
+              <div>
+                <h3><%= item.name %></h3>
+                <span><%= item.role %></span>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section-pad">
+    <div class="cta-bg" style="background-image:url('<%= homepage.cta.background_image_url %>');"></div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-left">
+          <span class="eyebrow"><%= homepage.cta.label %></span>
+          <h2><%= homepage.cta.title %></h2>
+          <p><%= homepage.cta.text %></p>
+        </div>
+        <div class="cta-right">
+          <a href="<%= homepage.cta.button_href %>" class="btn-primary"><%= homepage.cta.button_label %></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/shared.js"></script>
+  <script>
+    renderLayout('home');
+    staggerChildren('.expertise-card', 0, 80);
+    staggerChildren('.why-card', 0, 100);
+    staggerChildren('.testimonial-card', 0, 80);
+    initFadeIn();
+  </script>
+</body>
+</html>

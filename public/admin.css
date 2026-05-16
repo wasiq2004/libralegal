@@ -220,6 +220,38 @@ body.admin-body {
     box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
 }
 
+.admin-form-section {
+    margin-bottom: 28px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #fafbfd;
+}
+
+.admin-form-section h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 18px;
+}
+
+.admin-repeat-card {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid #dde5ef;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-repeat-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5f6a7b;
+    margin-bottom: 14px;
+}
+
 .admin-btn-row {
     display: flex;
     align-items: center;

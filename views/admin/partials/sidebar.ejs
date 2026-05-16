@@ -19,13 +19,13 @@
 
   <nav class="admin-side-nav" aria-label="Admin navigation">
     <a href="/admin/dashboard?section=overview" class="admin-side-link <%= currentSection === 'overview' ? 'active' : '' %>">Overview</a>
+    <a href="/admin/dashboard?section=homepage" class="admin-side-link <%= currentSection === 'homepage' ? 'active' : '' %>">Homepage</a>
     <a href="/admin/dashboard?section=blogs" class="admin-side-link <%= currentSection === 'blogs' ? 'active' : '' %>">Blogs</a>
     <a href="/admin/dashboard?section=services" class="admin-side-link <%= currentSection === 'services' ? 'active' : '' %>">Services</a>
-    <a href="/blogs" class="admin-side-link">View Public Blogs</a>
-    <a href="/services" class="admin-side-link">View Public Services</a>
   </nav>
 
   <div class="admin-sidebar-actions">
+    <a href="/admin/homepage/edit" class="admin-btn">Edit Homepage</a>
     <a href="/admin/blogs/new" class="admin-btn">New Blog Post</a>
     <a href="/admin/services/new" class="admin-btn-secondary">New Service Page</a>
   </div>

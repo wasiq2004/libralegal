@@ -56,12 +56,25 @@ const TRANSLATION_EXCLUDED_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAM
 const WHATSAPP_NUMBER = '971581216686';
 const WHATSAPP_MESSAGE = 'Hello, I would like to inquire about your legal services.';
 const SOCIAL_LINKS = [
-  { href: 'http://linkedin.com/company/libra-legal-consultancy', label: 'LinkedIn', short: 'in' },
-  { href: 'http://instagram.com/libralegalconsultancy', label: 'Instagram', short: 'IG' },
-  { href: 'https://www.facebook.com/libralegalconsultancy', label: 'Facebook', short: 'f' },
-  { href: 'http://tiktok.com/@libra.legal.consu', label: 'TikTok', short: 'TK' }
+  { href: 'http://linkedin.com/company/libra-legal-consultancy', label: 'LinkedIn', icon: 'linkedin' },
+  { href: 'http://instagram.com/libralegalconsultancy', label: 'Instagram', icon: 'instagram' },
+  { href: 'https://www.facebook.com/libralegalconsultancy', label: 'Facebook', icon: 'facebook' },
+  { href: 'http://tiktok.com/@libra.legal.consu', label: 'TikTok', icon: 'tiktok' },
+  { href: 'https://www.youtube.com/@libralegalconsultancy', label: 'YouTube', icon: 'youtube' }
 ];
 let currentTranslationToken = 0;
+
+function getSocialIconSVG(icon) {
+  const icons = {
+    linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3.1a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92ZM20.44 13.02c0-3.45-1.84-5.06-4.3-5.06-1.98 0-2.87 1.09-3.37 1.85V8.5H9.4c.04.87 0 11.5 0 11.5h3.37v-6.42c0-.34.02-.67.12-.92.27-.67.88-1.36 1.9-1.36 1.34 0 1.88 1.02 1.88 2.52V20h3.37v-6.98Z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.93 1.35a1.07 1.07 0 1 1 0 2.14 1.07 1.07 0 0 1 0-2.14ZM12 6.86A5.14 5.14 0 1 1 6.86 12 5.14 5.14 0 0 1 12 6.86Zm0 1.8A3.34 3.34 0 1 0 15.34 12 3.34 3.34 0 0 0 12 8.66Z"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.42 20v-7.1h2.38l.36-2.77h-2.74V8.36c0-.8.22-1.35 1.37-1.35H16.3V4.53c-.26-.03-1.15-.11-2.19-.11-2.17 0-3.65 1.32-3.65 3.76v1.95H8v2.77h2.46V20h2.96Z"/></svg>',
+    tiktok: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14.83 3c.22 1.87 1.27 3.38 2.95 4.3A6.1 6.1 0 0 0 21 8.1v2.85a8.86 8.86 0 0 1-3.14-.58v5.04c0 3.35-2.71 6.09-6.07 6.09a6.08 6.08 0 0 1-4.2-10.48 6.02 6.02 0 0 1 3.5-1.64v2.92a3.12 3.12 0 0 0-1.41.7 3.17 3.17 0 0 0 2.04 5.57c1.75 0 3.18-1.42 3.18-3.17V3h2.93Z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21.58 7.19a2.98 2.98 0 0 0-2.1-2.11C17.62 4.6 12 4.6 12 4.6s-5.62 0-7.48.48a2.98 2.98 0 0 0-2.1 2.11C1.94 9.06 1.94 12 1.94 12s0 2.94.48 4.81a2.98 2.98 0 0 0 2.1 2.11c1.86.48 7.48.48 7.48.48s5.62 0 7.48-.48a2.98 2.98 0 0 0 2.1-2.11c.48-1.87.48-4.81.48-4.81s0-2.94-.48-4.81ZM10.2 14.98V9.02L15.4 12l-5.2 2.98Z"/></svg>'
+  };
+
+  return icons[icon] || '';
+}
 
 function getSavedLanguage() {
   const saved = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -165,7 +178,7 @@ function getFooterHTML() {
               </div>
               <div class="footer-social">
                 ${SOCIAL_LINKS.map((link) => `
-                  <a href="${link.href}" class="social-icon" title="${link.label}" aria-label="${link.label}" target="_blank" rel="noopener noreferrer">${link.short}</a>
+                  <a href="${link.href}" class="social-icon social-icon-${link.icon}" title="${link.label}" aria-label="${link.label}" target="_blank" rel="noopener noreferrer">${getSocialIconSVG(link.icon)}</a>
                 `).join('')}
               </div>
             </div>

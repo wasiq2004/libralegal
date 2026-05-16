@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Homepage | Libra Legal Consultancy</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <div class="admin-app admin-wrap">
+      <%- include('partials/sidebar', { adminUser, csrfToken, currentSection }) %>
+
+      <section class="admin-main">
+        <div class="admin-head admin-head-main">
+          <div>
+            <span class="admin-kicker">Homepage CMS</span>
+            <h1>Edit Homepage Content</h1>
+            <p class="admin-muted">This single editor drives the public homepage. Hero copy, practice content, expertise cards, Why Libra, testimonials, and the CTA all stay synced from here.</p>
+          </div>
+          <div class="admin-btn-row">
+            <a href="/" class="admin-btn-secondary">View Homepage</a>
+            <a href="/admin/dashboard?section=homepage" class="admin-btn-secondary">Back to Dashboard</a>
+          </div>
+        </div>
+
+        <% if (errors && errors.length) { %>
+          <div class="admin-alert error">
+            <ul>
+              <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <section class="admin-form-card">
+          <h2>Homepage Sections</h2>
+          <p><%= homepage.updated_at ? `Last updated: ${new Date(homepage.updated_at).toLocaleString()}` : 'Using the current live homepage values as the editable baseline.' %></p>
+
+          <form method="post" action="/admin/homepage" class="admin-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+            <div class="admin-field">
+              <label for="meta_description">Meta Description</label>
+              <textarea id="meta_description" name="meta_description" rows="3" style="min-height:110px;"><%= homepage.meta_description %></textarea>
+            </div>
+
+            <div class="admin-form-section">
+              <h3>Hero Section</h3>
+              <div class="admin-field">
+                <label for="hero_eyebrow">Eyebrow</label>
+                <input id="hero_eyebrow" name="hero_eyebrow" type="text" maxlength="120" value="<%= homepage.hero.eyebrow %>" />
+              </div>
+              <div class="admin-field">
+                <label for="hero_title">Title</label>
+                <textarea id="hero_title" name="hero_title" rows="3" style="min-height:110px;"><%= homepage.hero.title %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="hero_intro">Intro</label>
+                <textarea id="hero_intro" name="hero_intro" rows="6" style="min-height:180px;"><%= homepage.hero.intro %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="hero_background_image_url">Background Image URL</label>
+                <input id="hero_background_image_url" name="hero_background_image_url" type="text" maxlength="2048" value="<%= homepage.hero.background_image_url %>" />
+              </div>
+              <div class="admin-field">
+                <label for="hero_primary_label">Primary Button Label</label>
+                <input id="hero_primary_label" name="hero_primary_label" type="text" maxlength="120" value="<%= homepage.hero.primary_label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="hero_primary_href">Primary Button Link</label>
+                <input id="hero_primary_href" name="hero_primary_href" type="text" maxlength="2048" value="<%= homepage.hero.primary_href %>" />
+              </div>
+              <div class="admin-field">
+                <label for="hero_secondary_label">Secondary Button Label</label>
+                <input id="hero_secondary_label" name="hero_secondary_label" type="text" maxlength="120" value="<%= homepage.hero.secondary_label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="hero_secondary_href">Secondary Button Link</label>
+                <input id="hero_secondary_href" name="hero_secondary_href" type="text" maxlength="2048" value="<%= homepage.hero.secondary_href %>" />
+              </div>
+            </div>
+
+            <div class="admin-form-section">
+              <h3>Practice Section</h3>
+              <div class="admin-field">
+                <label for="practice_label">Section Label</label>
+                <input id="practice_label" name="practice_label" type="text" maxlength="120" value="<%= homepage.practice.label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="practice_title">Heading</label>
+                <textarea id="practice_title" name="practice_title" rows="4" style="min-height:120px;"><%= homepage.practice.title %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="practice_paragraph_1">Paragraph 1</label>
+                <textarea id="practice_paragraph_1" name="practice_paragraph_1" rows="5" style="min-height:150px;"><%= homepage.practice.paragraph_1 %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="practice_paragraph_2">Paragraph 2</label>
+                <textarea id="practice_paragraph_2" name="practice_paragraph_2" rows="6" style="min-height:180px;"><%= homepage.practice.paragraph_2 %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="practice_image_url">Image URL</label>
+                <input id="practice_image_url" name="practice_image_url" type="text" maxlength="2048" value="<%= homepage.practice.image_url %>" />
+              </div>
+              <div class="admin-field">
+                <label for="practice_cta_label">Button Label</label>
+                <input id="practice_cta_label" name="practice_cta_label" type="text" maxlength="120" value="<%= homepage.practice.cta_label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="practice_cta_href">Button Link</label>
+                <input id="practice_cta_href" name="practice_cta_href" type="text" maxlength="2048" value="<%= homepage.practice.cta_href %>" />
+              </div>
+            </div>
+
+            <div class="admin-form-section">
+              <h3>Expertise Section</h3>
+              <div class="admin-field">
+                <label for="expertise_label">Section Label</label>
+                <input id="expertise_label" name="expertise_label" type="text" maxlength="120" value="<%= homepage.expertise.label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="expertise_title">Heading</label>
+                <textarea id="expertise_title" name="expertise_title" rows="3" style="min-height:110px;"><%= homepage.expertise.title %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="expertise_cta_label">Header Button Label</label>
+                <input id="expertise_cta_label" name="expertise_cta_label" type="text" maxlength="120" value="<%= homepage.expertise.cta_label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="expertise_cta_href">Header Button Link</label>
+                <input id="expertise_cta_href" name="expertise_cta_href" type="text" maxlength="2048" value="<%= homepage.expertise.cta_href %>" />
+              </div>
+              <div class="admin-field">
+                <label for="expertise_active_index">Highlighted Card Number</label>
+                <input id="expertise_active_index" name="expertise_active_index" type="number" min="1" max="6" value="<%= homepage.expertise.active_index %>" />
+              </div>
+
+              <% homepage.expertise.items.forEach((item, index) => { %>
+                <div class="admin-repeat-card">
+                  <h4>Expertise Card <%= index + 1 %></h4>
+                  <div class="admin-field">
+                    <label for="expertise_number_<%= index + 1 %>">Card Number</label>
+                    <input id="expertise_number_<%= index + 1 %>" name="expertise_number_<%= index + 1 %>" type="text" maxlength="10" value="<%= item.number %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="expertise_title_<%= index + 1 %>">Title</label>
+                    <input id="expertise_title_<%= index + 1 %>" name="expertise_title_<%= index + 1 %>" type="text" maxlength="180" value="<%= item.title %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="expertise_image_url_<%= index + 1 %>">Image URL</label>
+                    <input id="expertise_image_url_<%= index + 1 %>" name="expertise_image_url_<%= index + 1 %>" type="text" maxlength="2048" value="<%= item.image_url %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="expertise_image_alt_<%= index + 1 %>">Image Alt</label>
+                    <input id="expertise_image_alt_<%= index + 1 %>" name="expertise_image_alt_<%= index + 1 %>" type="text" maxlength="180" value="<%= item.image_alt %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="expertise_href_<%= index + 1 %>">Card Link</label>
+                    <input id="expertise_href_<%= index + 1 %>" name="expertise_href_<%= index + 1 %>" type="text" maxlength="2048" value="<%= item.href %>" />
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+
+            <div class="admin-form-section">
+              <h3>Why Libra Section</h3>
+              <div class="admin-field">
+                <label for="why_label">Section Label</label>
+                <input id="why_label" name="why_label" type="text" maxlength="120" value="<%= homepage.why.label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="why_title">Heading</label>
+                <textarea id="why_title" name="why_title" rows="3" style="min-height:110px;"><%= homepage.why.title %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="why_quote">Quote</label>
+                <textarea id="why_quote" name="why_quote" rows="5" style="min-height:150px;"><%= homepage.why.quote %></textarea>
+              </div>
+
+              <% homepage.why.items.forEach((item, index) => { %>
+                <div class="admin-repeat-card">
+                  <h4>Why Libra Card <%= index + 1 %></h4>
+                  <div class="admin-field">
+                    <label for="why_number_<%= index + 1 %>">Card Number</label>
+                    <input id="why_number_<%= index + 1 %>" name="why_number_<%= index + 1 %>" type="text" maxlength="10" value="<%= item.number %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="why_title_<%= index + 1 %>">Title</label>
+                    <input id="why_title_<%= index + 1 %>" name="why_title_<%= index + 1 %>" type="text" maxlength="180" value="<%= item.title %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="why_text_<%= index + 1 %>">Description</label>
+                    <textarea id="why_text_<%= index + 1 %>" name="why_text_<%= index + 1 %>" rows="5" style="min-height:150px;"><%= item.text %></textarea>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+
+            <div class="admin-form-section">
+              <h3>Testimonials Section</h3>
+              <div class="admin-field">
+                <label for="testimonials_label">Section Label</label>
+                <input id="testimonials_label" name="testimonials_label" type="text" maxlength="120" value="<%= homepage.testimonials.label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="testimonials_title">Heading</label>
+                <textarea id="testimonials_title" name="testimonials_title" rows="3" style="min-height:110px;"><%= homepage.testimonials.title %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="testimonials_intro">Intro</label>
+                <textarea id="testimonials_intro" name="testimonials_intro" rows="5" style="min-height:150px;"><%= homepage.testimonials.intro %></textarea>
+              </div>
+
+              <% homepage.testimonials.items.forEach((item, index) => { %>
+                <div class="admin-repeat-card">
+                  <h4>Testimonial <%= index + 1 %></h4>
+                  <div class="admin-field">
+                    <label for="testimonial_name_<%= index + 1 %>">Client Name</label>
+                    <input id="testimonial_name_<%= index + 1 %>" name="testimonial_name_<%= index + 1 %>" type="text" maxlength="160" value="<%= item.name %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="testimonial_role_<%= index + 1 %>">Client Role</label>
+                    <input id="testimonial_role_<%= index + 1 %>" name="testimonial_role_<%= index + 1 %>" type="text" maxlength="160" value="<%= item.role %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="testimonial_photo_url_<%= index + 1 %>">Photo URL</label>
+                    <input id="testimonial_photo_url_<%= index + 1 %>" name="testimonial_photo_url_<%= index + 1 %>" type="text" maxlength="2048" value="<%= item.photo_url %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="testimonial_photo_alt_<%= index + 1 %>">Photo Alt</label>
+                    <input id="testimonial_photo_alt_<%= index + 1 %>" name="testimonial_photo_alt_<%= index + 1 %>" type="text" maxlength="160" value="<%= item.photo_alt %>" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="testimonial_text_<%= index + 1 %>">Testimonial Text</label>
+                    <textarea id="testimonial_text_<%= index + 1 %>" name="testimonial_text_<%= index + 1 %>" rows="5" style="min-height:150px;"><%= item.text %></textarea>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+
+            <div class="admin-form-section">
+              <h3>CTA Section</h3>
+              <div class="admin-field">
+                <label for="cta_label">Section Label</label>
+                <input id="cta_label" name="cta_label" type="text" maxlength="120" value="<%= homepage.cta.label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="cta_title">Heading</label>
+                <textarea id="cta_title" name="cta_title" rows="3" style="min-height:110px;"><%= homepage.cta.title %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="cta_text">Text</label>
+                <textarea id="cta_text" name="cta_text" rows="5" style="min-height:150px;"><%= homepage.cta.text %></textarea>
+              </div>
+              <div class="admin-field">
+                <label for="cta_background_image_url">Background Image URL</label>
+                <input id="cta_background_image_url" name="cta_background_image_url" type="text" maxlength="2048" value="<%= homepage.cta.background_image_url %>" />
+              </div>
+              <div class="admin-field">
+                <label for="cta_button_label">Button Label</label>
+                <input id="cta_button_label" name="cta_button_label" type="text" maxlength="120" value="<%= homepage.cta.button_label %>" />
+              </div>
+              <div class="admin-field">
+                <label for="cta_button_href">Button Link</label>
+                <input id="cta_button_href" name="cta_button_href" type="text" maxlength="2048" value="<%= homepage.cta.button_href %>" />
+              </div>
+            </div>
+
+            <div class="admin-btn-row">
+              <button type="submit" class="admin-btn">Save Homepage Changes</button>
+              <a href="/admin/dashboard?section=homepage" class="admin-btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </section>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

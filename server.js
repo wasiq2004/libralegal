@@ -20,12 +20,16 @@ const {
   updateBlogPost
 } = require('./lib/blogs');
 const {
+  getHomepageContent,
+  getHomepageContentForAdmin,
+  updateHomepageContent
+} = require('./lib/homepage');
+const {
   createServicePage,
   deleteServicePage,
   getAllServicesForAdmin,
   getPublishedServices,
   getServiceById,
-  syncServicesFromStaticFiles,
   updateServicePage
 } = require('./lib/services');
 const {
@@ -227,8 +231,13 @@ app.post('/api/translate', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(ROOT, 'index.html'));
+app.get('/', async (req, res, next) => {
+  try {
+    const homepage = await getHomepageContent();
+    res.render('public/home', { homepage });
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.get('/about', (req, res) => {
@@ -246,6 +255,10 @@ app.get('/contact', (req, res) => {
 
 app.get('/contact.html', (req, res) => {
   res.redirect(301, '/contact');
+});
+
+app.get('/index.html', (req, res) => {
+  res.redirect(301, '/');
 });
 
 app.get('/services.html', (req, res) => {
@@ -451,11 +464,14 @@ app.get('/admin/dashboard', requireAuth, async (req, res, next) => {
   try {
     const currentSection = req.query.section === 'services'
       ? 'services'
+      : req.query.section === 'homepage'
+        ? 'homepage'
       : req.query.section === 'overview'
         ? 'overview'
         : 'blogs';
     let posts = [];
     let services = [];
+    let homepage = null;
     let flashError = res.locals.flashError;
 
     try {
@@ -472,9 +488,18 @@ app.get('/admin/dashboard', requireAuth, async (req, res, next) => {
         : 'Database connection unavailable. The dashboard skeleton is loaded, but service management requires MySQL.';
     }
 
+    try {
+      homepage = await getHomepageContentForAdmin();
+    } catch (dbError) {
+      flashError = flashError
+        ? `${flashError} Homepage management also requires MySQL for saving.`
+        : 'Database connection unavailable. The dashboard skeleton is loaded, but homepage management requires MySQL for saving.';
+    }
+
     res.render('admin/dashboard', {
       adminUser: req.session.adminUser,
       currentSection,
+      homepage,
       posts,
       services,
       csrfToken: res.locals.csrfToken,
@@ -504,6 +529,46 @@ app.get('/admin/blogs/new', requireAuth, (req, res) => {
     errors: [],
     csrfToken: res.locals.csrfToken
   });
+});
+
+app.get('/admin/homepage/edit', requireAuth, async (req, res, next) => {
+  try {
+    const homepage = await getHomepageContentForAdmin();
+    return res.render('admin/homepage-editor', {
+      adminUser: req.session.adminUser,
+      currentSection: 'homepage',
+      homepage,
+      errors: [],
+      csrfToken: res.locals.csrfToken
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+app.post('/admin/homepage', requireAuth, async (req, res, next) => {
+  try {
+    if (!verifyCsrf(req)) {
+      setFlash(req, 'error', 'Security validation failed. Please try again.');
+      return res.redirect('/admin/homepage/edit');
+    }
+
+    const result = await updateHomepageContent(req.body);
+    if (result.errors) {
+      return res.status(422).render('admin/homepage-editor', {
+        adminUser: req.session.adminUser,
+        currentSection: 'homepage',
+        homepage: result.content,
+        errors: result.errors,
+        csrfToken: res.locals.csrfToken
+      });
+    }
+
+    setFlash(req, 'success', 'Homepage content updated successfully.');
+    return res.redirect('/admin/dashboard?section=homepage');
+  } catch (error) {
+    return next(error);
+  }
 });
 
 app.post('/admin/blogs', requireAuth, async (req, res, next) => {
@@ -734,6 +799,11 @@ app.use((error, req, res, next) => {
 });
 
 const port = Number(process.env.PORT || 3000);
-app.listen(port, () => {
-  console.log(`Libra Legal CMS running at http://localhost:${port}`);
-});
+
+async function startServer() {
+  app.listen(port, () => {
+    console.log(`Libra Legal CMS running at http://localhost:${port}`);
+  });
+}
+
+startServer();
