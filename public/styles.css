@@ -2689,9 +2689,9 @@ footer {
     .navbar,
     .navbar.light,
     .navbar.transparent {
-        background: transparent;
-        box-shadow: none;
-        border-bottom: none;
+        background: rgba(10, 22, 40, 0.92);
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .navbar.light .nav-logo-text,
