@@ -470,6 +470,50 @@ html[dir="rtl"] .contact-detail {
     color: var(--gold);
 }
 
+.expertise-cta {
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+    background: linear-gradient(135deg, #103f76 0%, #1d5fa7 55%, #2d78c8 100%);
+    border-color: transparent;
+    box-shadow: 0 14px 34px rgba(16, 63, 118, 0.2);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+}
+
+.expertise-cta::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+    pointer-events: none;
+}
+
+.expertise-cta::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -30%;
+    width: 24%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.expertise-cta:hover {
+    transform: translateY(-2px);
+    color: var(--white);
+    border-color: transparent;
+    background: linear-gradient(135deg, #0c345f 0%, #164f8b 55%, #2566af 100%);
+    box-shadow: 0 18px 38px rgba(12, 52, 95, 0.28);
+}
+
+.expertise-cta:hover::after {
+    left: 112%;
+}
+
 .btn-gold-outline {
     display: inline-block;
     background: transparent;
@@ -2150,15 +2194,20 @@ footer {
 .contact-social-icon {
     width: 42px;
     height: 42px;
-    border-color: rgba(10, 22, 40, 0.14);
-    color: var(--navy);
-    background: var(--white);
 }
 
 .contact-social-icon:hover {
-    border-color: var(--gold);
-    background: rgba(201, 168, 76, 0.08);
-    color: var(--gold);
+    background: inherit;
+}
+
+.contact-social-icon.social-icon-tiktok {
+    background: #111111;
+    border-color: rgba(17, 17, 17, 0.45);
+    color: #ffffff;
+}
+
+.contact-social-icon.social-icon-tiktok:hover {
+    background: #1a1a1a;
 }
 
 /* Contact Form */
