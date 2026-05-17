@@ -49,11 +49,11 @@
           <span class="eyebrow"><%= homepage.expertise.label %></span>
           <h2><%= homepage.expertise.title %></h2>
         </div>
-        <a href="<%= homepage.expertise.cta_href %>" class="btn-outline-dark" style="white-space:nowrap;"><%= homepage.expertise.cta_label %></a>
+        <a href="<%= homepage.expertise.cta_href %>" class="btn-outline-dark expertise-cta" style="white-space:nowrap;"><%= homepage.expertise.cta_label %></a>
       </div>
       <div class="expertise-grid">
         <% homepage.expertise.items.forEach((item, index) => { %>
-          <div class="expertise-card <%= homepage.expertise.active_index === index + 1 ? 'active ' : '' %>fade-in-up" <%= index > 0 ? `data-delay="${(index % 3) * 100}"` : '' %>>
+          <div class="expertise-card fade-in-up" <%= index > 0 ? `data-delay="${(index % 3) * 100}"` : '' %>>
             <img class="card-image" src="<%= item.image_url %>" alt="<%= item.image_alt %>" loading="lazy" />
             <div class="card-body">
               <span class="card-number"><%= item.number %></span>

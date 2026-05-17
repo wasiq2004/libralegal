@@ -135,7 +135,7 @@ button {
 }
 
 .navbar.light {
-    background: rgba(10, 22, 40, 0.92);
+    background: rgba(10, 22, 40, 0.78);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12);
@@ -471,13 +471,19 @@ html[dir="rtl"] .contact-detail {
 }
 
 .expertise-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
     position: relative;
     overflow: hidden;
     color: var(--white);
     background: linear-gradient(135deg, #103f76 0%, #1d5fa7 55%, #2d78c8 100%);
     border-color: transparent;
     box-shadow: 0 14px 34px rgba(16, 63, 118, 0.2);
-    transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), gap var(--transition);
 }
 
 .expertise-cta::before {
@@ -503,6 +509,7 @@ html[dir="rtl"] .contact-detail {
 }
 
 .expertise-cta:hover {
+    gap: 14px;
     transform: translateY(-2px);
     color: var(--white);
     border-color: transparent;
@@ -512,6 +519,16 @@ html[dir="rtl"] .contact-detail {
 
 .expertise-cta:hover::after {
     left: 112%;
+}
+
+.expertise-cta,
+.expertise-cta .arrow {
+    position: relative;
+    z-index: 1;
+}
+
+.expertise-cta .arrow {
+    font-size: 14px;
 }
 
 .btn-gold-outline {
@@ -2738,7 +2755,7 @@ footer {
     .navbar,
     .navbar.light,
     .navbar.transparent {
-        background: rgba(10, 22, 40, 0.92);
+        background: rgba(10, 22, 40, 0.78);
         box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }

@@ -70,4 +70,4 @@ CREATE TABLE IF NOT EXISTS `cms_sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `admin_users` (`email`, `password_hash`, `full_name`)
-VALUES ('libralegalconsultancy@gmail.com', '$2a$12$9Y0/1Zf2X4O3Q6K7R8S9T.uVwXxYyZz0123456789abcdefghijk', 'Libra Legal Admin');
+VALUES ('libralegalconsultancy@gmail.com', '$2a$12$Rso4DbPwBjJFs5eal6ZF/.SbQq68zlgPe3N3y.hYecULaik/o1JIC', 'Libra Legal Admin');

@@ -147,7 +147,7 @@ function getNavHTML(activePage = 'home', transparent = false) {
           ${getLanguageSwitcherHTML()}
           <a href="/contact" class="btn-consultation">FREE CONSULTATION</a>
         </div>
-        <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+        <div class="hamburger" id="hamburger">
           <span></span><span></span><span></span>
         </div>
       </div>
@@ -206,7 +206,6 @@ function getFooterHTML() {
       <div class="container">
         <div class="footer-bottom">
           <p>© 2026 Libra Legal Consultancy. All rights reserved.</p>
-          <p>UAE - Legal Advisory & Regulatory Counsel</p>
         </div>
       </div>
     </footer>

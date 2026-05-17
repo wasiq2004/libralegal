@@ -319,23 +319,6 @@ app.get('/services/:slug.html', async (req, res, next) => {
   }
 });
 
-app.use(express.static(path.join(ROOT, 'public'), {
-  index: false
-}));
-
-app.use(express.static(ROOT, {
-  index: false,
-  extensions: ['html']
-}));
-
-app.get('/blogs.html', (req, res) => {
-  res.redirect(301, '/blogs');
-});
-
-app.get('/blogs/:slug.html', (req, res) => {
-  res.redirect(301, `/blogs/${req.params.slug}`);
-});
-
 app.get('/blogs', async (req, res, next) => {
   try {
     const posts = await getPublishedBlogs();
@@ -360,6 +343,23 @@ app.get('/blogs/:slug', async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
+});
+
+app.use(express.static(path.join(ROOT, 'public'), {
+  index: false
+}));
+
+app.use(express.static(ROOT, {
+  index: false,
+  extensions: ['html']
+}));
+
+app.get('/blogs.html', (req, res) => {
+  res.redirect(301, '/blogs');
+});
+
+app.get('/blogs/:slug.html', (req, res) => {
+  res.redirect(301, `/blogs/${req.params.slug}`);
 });
 
 app.get('/admin', (req, res) => {
