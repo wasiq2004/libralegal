@@ -43,11 +43,54 @@ const app = express();
 const ROOT = __dirname;
 const MySQLStore = MySQLStoreFactory(session);
 const translationCache = new Map();
+const isProduction = process.env.NODE_ENV === 'production';
 const shouldUseMySqlSessions =
-  process.env.NODE_ENV === 'production' &&
+  isProduction &&
   process.env.MYSQL_HOST &&
   process.env.MYSQL_DATABASE &&
   process.env.MYSQL_USER;
+
+function parseTrustProxySetting(value) {
+  const normalized = String(value || '').trim().toLowerCase();
+
+  if (!normalized) {
+    return isProduction ? 1 : false;
+  }
+
+  if (normalized === 'true') return true;
+  if (normalized === 'false') return false;
+
+  const numeric = Number.parseInt(normalized, 10);
+  if (Number.isInteger(numeric) && numeric >= 0) {
+    return numeric;
+  }
+
+  return value;
+}
+
+function validateProductionConfig() {
+  if (!isProduction) {
+    return;
+  }
+
+  const sessionSecret = String(process.env.SESSION_SECRET || '').trim();
+  if (!sessionSecret || sessionSecret === 'development-only-secret-change-me') {
+    throw new Error('SESSION_SECRET must be set to a strong unique value in production.');
+  }
+}
+
+function canAccessOperationalRoute(req) {
+  if (!isProduction) {
+    return true;
+  }
+
+  const configuredToken = String(process.env.OPS_ACCESS_TOKEN || '').trim();
+  if (configuredToken) {
+    return req.get('x-ops-token') === configuredToken;
+  }
+
+  return req.ip === '127.0.0.1' || req.ip === '::1' || req.ip === '::ffff:127.0.0.1';
+}
 
 const sessionStore = shouldUseMySqlSessions
   ? new MySQLStore({
@@ -63,7 +106,7 @@ const sessionStore = shouldUseMySqlSessions
     }, getPool())
   : undefined;
 
-app.set('trust proxy', 1);
+app.set('trust proxy', parseTrustProxySetting(process.env.TRUST_PROXY));
 app.set('view engine', 'ejs');
 app.set('views', path.join(ROOT, 'views'));
 
@@ -97,7 +140,7 @@ app.use(session({
   cookie: {
     httpOnly: true,
     sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    secure: isProduction ? 'auto' : false,
     maxAge: 1000 * 60 * 60 * 8
   }
 }));
@@ -122,6 +165,14 @@ const loginLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: 'Too many login attempts. Please try again later.'
+});
+
+const translateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: isProduction ? 60 : 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many translation requests. Please try again later.' }
 });
 
 function setFlash(req, type, message) {
@@ -207,6 +258,10 @@ async function translateText(text, targetLanguage) {
 }
 
 app.get('/health', async (req, res) => {
+  if (!canAccessOperationalRoute(req)) {
+    return res.status(404).json({ ok: false });
+  }
+
   try {
     await query('SELECT 1');
     res.json({ ok: true, database: true });
@@ -215,7 +270,7 @@ app.get('/health', async (req, res) => {
   }
 });
 
-app.post('/api/translate', async (req, res) => {
+app.post('/api/translate', translateLimiter, async (req, res) => {
   const targetLanguage = ['ar', 'ru'].includes(req.body?.targetLanguage)
     ? req.body.targetLanguage
     : 'en';
@@ -807,6 +862,7 @@ app.use((error, req, res, next) => {
 const port = Number(process.env.PORT || 3000);
 
 async function startServer() {
+  validateProductionConfig();
   app.listen(port, () => {
     console.log(`Libra Legal CMS running at http://localhost:${port}`);
   });
