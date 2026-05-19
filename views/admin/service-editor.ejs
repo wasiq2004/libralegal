@@ -60,12 +60,12 @@
 
                 <div class="admin-field">
                   <label for="overview_html">Overview (HTML)</label>
-                  <textarea id="overview_html" name="overview_html" required><%= service.overview_html || '' %></textarea>
+                  <textarea id="overview_html" name="overview_html" required><%- prepareTextareaValue(service.overview_html || '') %></textarea>
                 </div>
 
                 <div class="admin-field">
                   <label for="approach_html">Strategic Approach (HTML)</label>
-                  <textarea id="approach_html" name="approach_html" required><%= service.approach_html || '' %></textarea>
+                  <textarea id="approach_html" name="approach_html" required><%- prepareTextareaValue(service.approach_html || '') %></textarea>
                 </div>
               </div>
 

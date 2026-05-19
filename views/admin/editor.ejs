@@ -55,7 +55,7 @@
 
                 <div class="admin-field">
                   <label for="content_html">Article Content (HTML)</label>
-                  <textarea id="content_html" name="content_html" required><%= post.content_html || '' %></textarea>
+                  <textarea id="content_html" name="content_html" required><%- prepareTextareaValue(post.content_html || '') %></textarea>
                 </div>
               </div>
 

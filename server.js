@@ -34,6 +34,7 @@ const {
 } = require('./lib/services');
 const {
   issueCsrfToken,
+  prepareTextareaValue,
   requireAuth,
   verifyCsrf
 } = require('./lib/security');
@@ -105,9 +106,14 @@ app.use((req, res, next) => {
   res.locals.csrfToken = issueCsrfToken(req);
   res.locals.flashError = req.session.flashError || null;
   res.locals.flashSuccess = req.session.flashSuccess || null;
+  res.locals.prepareTextareaValue = prepareTextareaValue;
   delete req.session.flashError;
   delete req.session.flashSuccess;
   next();
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(ROOT, 'public', 'assets', 'favico.ico'));
 });
 
 const loginLimiter = rateLimit({
