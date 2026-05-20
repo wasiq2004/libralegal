@@ -201,6 +201,12 @@
 
             <div class="admin-form-section">
               <h3>Testimonials Section</h3>
+              <div class="admin-toggle-row">
+                <label for="testimonials_enabled" class="admin-toggle-label">
+                  <input id="testimonials_enabled" name="testimonials_enabled" type="checkbox" <%= homepage.testimonials.enabled ? 'checked' : '' %> />
+                  <span>Show testimonials section on homepage</span>
+                </label>
+              </div>
               <div class="admin-field">
                 <label for="testimonials_label">Section Label</label>
                 <input id="testimonials_label" name="testimonials_label" type="text" maxlength="120" value="<%= homepage.testimonials.label %>" />
