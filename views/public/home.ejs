@@ -87,31 +87,10 @@
     </div>
   </section>
 
-  <% if (homepage.testimonials.enabled) { %>
-    <section class="testimonials-section section-pad">
-      <div class="container">
-        <div class="testimonials-header fade-in">
-          <span class="section-label"><%= homepage.testimonials.label %></span>
-          <h2><%= homepage.testimonials.title %></h2>
-          <p><%= homepage.testimonials.intro %></p>
-        </div>
-        <div class="testimonials-grid">
-          <% homepage.testimonials.items.forEach((item, index) => { %>
-            <article class="testimonial-card fade-in-up" <%= index > 0 ? `data-delay="${(index % 3) * 100}"` : '' %>>
-              <p class="testimonial-text"><%= item.text %></p>
-              <div class="testimonial-client">
-                <img src="<%= item.photo_url %>" alt="<%= item.photo_alt %>" class="testimonial-avatar" loading="lazy" />
-                <div>
-                  <h3><%= item.name %></h3>
-                  <span><%= item.role %></span>
-                </div>
-              </div>
-            </article>
-          <% }) %>
-        </div>
-      </div>
-    </section>
-  <% } %>
+  <section class="home-widget-section">
+    <div id="JFWebsiteWidget-019e4e38ecf4785a804488410881433fb6d9"></div>
+    <script src="https://www.jotform.com/website-widgets/embed/019e4e38ecf4785a804488410881433fb6d9"></script>
+  </section>
 
   <section class="cta-section section-pad">
     <div class="cta-bg" style="background-image:url('<%= homepage.cta.background_image_url %>');"></div>
@@ -137,7 +116,6 @@
     renderLayout('home');
     staggerChildren('.expertise-card', 0, 80);
     staggerChildren('.why-card', 0, 100);
-    staggerChildren('.testimonial-card', 0, 80);
     initFadeIn();
   </script>
 </body>

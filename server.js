@@ -119,9 +119,33 @@ app.use(helmet({
       imgSrc: ["'self'", 'data:', 'https:'],
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
       fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
-      scriptSrc: ["'self'", "'unsafe-inline'", 'https://translate.google.com', 'https://translate.googleapis.com'],
-      connectSrc: ["'self'", 'https://translate.googleapis.com', 'https://translate.google.com', 'https://api.web3forms.com'],
-      frameSrc: ["'self'", 'https://translate.google.com', 'https://translate.googleapis.com', 'https://www.google.com'],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'https://translate.google.com',
+        'https://translate.googleapis.com',
+        'https://www.jotform.com',
+        'https://js.jotform.com',
+        'https://cdn.jotfor.ms'
+      ],
+      connectSrc: [
+        "'self'",
+        'https://translate.googleapis.com',
+        'https://translate.google.com',
+        'https://api.web3forms.com',
+        'https://www.jotform.com',
+        'https://api.jotform.com',
+        'https://cdn.jotfor.ms'
+      ],
+      frameSrc: [
+        "'self'",
+        'https://translate.google.com',
+        'https://translate.googleapis.com',
+        'https://www.google.com',
+        'https://www.jotform.com',
+        'https://form.jotform.com',
+        'https://submit.jotform.com'
+      ],
       formAction: ["'self'", 'https://api.web3forms.com'],
       objectSrc: ["'none'"]
     }
